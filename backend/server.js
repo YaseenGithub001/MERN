@@ -1,22 +1,37 @@
-const express = require('express')
+const express = require('express');
 const app = express();
-const PORT = 4578
-const mongoose = require('mongoose');
+const PORT = 4578 //PORT
+const mongoose = require('mongoose'); //mongoose for DB
+const cors = require('cors'); // to remore cor issue
+app.use(cors())  // cor policy activation
+app.use(express.json()); // to render json req from frontend
+app.use(express.urlencoded({extended:true})); // to render form data from frontend
 
-mongoose.connect("mongodb+srv://halfduplex001:M8aGFTFZOV3W9nvD@cluster0.u92xgk6.mongodb.net/")
-.then (()=>{console.log("MongoDB connected succussfully")})
-.catch((err)=>{console.log(err)})
+//connect backend with DB
+mongoose.connect("mongodb+srv://halfduplex001:M8aGFTFZOV3W9nvD@cluster0.u92xgk6.mongodb.net/")//!insert your username
+    .then(() => { console.log("MongoDB connected successfully") })//*success message
+    .catch((err) => { console.log("Error connecting to MongoDB " + err) });//*fail message
 
-app.get('/', (req,res)=>{
-    res.send('welcome')
+// CRUD operation 
+// C-Create - POST 
+//R-READ-GET
+//U-Update -PUT
+//D-Delete - DELETE
 
+app.post('/addData', (req, res) => {
+    try {
+
+        let item = req.body
+        console.log(item)
+
+
+
+    } catch (error) {
+        res.send(error);
+    }
 })
 
-app.get('/about',(req,res)=>{
-    res.send('open')
-})
 
-app.listen(PORT,()=>{
-    console.log(`listening on port ${PORT}`)
-
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`);
 });
