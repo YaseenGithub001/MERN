@@ -24,7 +24,7 @@ export default function App() {
 
   const sendData = async (data) => {
     try {
-      const send = await axios.post("http://localhost:4578/addData", data);
+      const send = await axios.post("http://localhost:5000/addData", data);
       console.log(send);
     } catch (error) {
       console.log(error);
